@@ -1,0 +1,105 @@
+<div class="common-table-container stylized-scroll-bar">
+    <mat-card class="common-table-mat-card">
+        <table
+                (matSortChange)="onTableSort($event.active,$event.direction)"
+                [dataSource]='dataSource'
+                class="common-table"
+                mat-table
+                matSort
+                matSortDisableClear="true"
+                multiTemplateDataRows>
+
+            <!--Text common columns-->
+            <ng-container *ngFor="let commonDataColumn of commonColumns"
+                          [matColumnDef]="commonDataColumn.columnTitle">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>
+                    {{ commonDataColumn.columnTitle }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <p *ngIf="commonDataColumn.textFormat == 'date'">
+                        {{ this.getValueBasedOnPath(row, commonDataColumn.columnProperty) | date : 'mediumDate' }}
+                    </p>
+                    <p *ngIf="commonDataColumn.textFormat == 'time'">
+                        {{ this.getValueBasedOnPath(row, commonDataColumn.columnProperty) | date : 'shortTime' }}
+                    </p>
+                    <p *ngIf="commonDataColumn.textFormat == null">
+                        {{ this.getValueBasedOnPath(row, commonDataColumn.columnProperty) }}
+                    </p>
+                </td>
+            </ng-container>
+
+            <!--Icon columns-->
+            <ng-container *ngFor="let iconColumn of iconColumns" [matColumnDef]="iconColumn.columnTitle">
+                <th *matHeaderCellDef mat-header-cell>
+                    {{ iconColumn.columnTitle }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                  <span>
+                      <mat-icon *ngIf="row[iconColumn.columnProperty]">
+                        {{iconColumn.matIconName}}
+                      </mat-icon>
+                  </span>
+                </td>
+            </ng-container>
+
+            <!--Enum to text columns-->
+            <ng-container *ngFor="let enumToTextColumn of enumToTextColumns"
+                          [matColumnDef]="enumToTextColumn.columnTitle">
+                <th *matHeaderCellDef mat-header-cell>
+                    {{ enumToTextColumn.columnTitle }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <p>
+                        {{ enumToString(enumToTextColumn.enumCoreTranslationNode, enumToTextColumn.enumType, this.getValueBasedOnPath(row, enumToTextColumn.columnProperty)) }}
+                    </p>
+                </td>
+            </ng-container>
+
+            <!--Action columns-->
+            <ng-container *ngFor="let actionColumn of actionColumns" [matColumnDef]="actionColumn.columnTitle">
+                <th *matHeaderCellDef mat-header-cell>
+                    {{ actionColumn.columnTitle }}
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <button (click)="onView(row)" *ngIf="actionColumn.actionType==allActionTypes.view"
+                            class="common-table-action-button" mat-mini-fab>
+                            <span>
+                              <mat-icon>visibility</mat-icon>
+                            </span>
+                    </button>
+                    <button (click)="onEdit(row)" *ngIf="actionColumn.actionType==allActionTypes.edit"
+                            class="common-table-action-button" mat-mini-fab>
+                            <span>
+                              <mat-icon>edit</mat-icon>
+                            </span>
+                    </button>
+                    <button (click)="onDelete(row)" *ngIf="actionColumn.actionType==allActionTypes.delete"
+                            [ngClass]="{'disabled-action': row['isCanBeDeleted']===false}"
+                            class="common-table-action-button" mat-mini-fab>
+                            <span>
+                              <mat-icon>delete</mat-icon>
+                            </span>
+                    </button>
+                    <button (click)="onLoginAs(row)" *ngIf="actionColumn.actionType==allActionTypes.loginAs"
+                            [ngClass]="{'disabled-action': row['isCanBeDeleted']===false}"
+                            class="common-table-action-button" mat-mini-fab>
+                            <span>
+                              <mat-icon>face</mat-icon>
+                            </span>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="allTitles; sticky: true"
+                mat-header-row></tr>
+            <tr *matRowDef="let row; columns: allTitles" mat-row></tr>
+        </table>
+        <mat-paginator
+                (page)="onPaginationChange($event)"
+                [length]="totalItemsCount"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                [pageSize]="10">
+        </mat-paginator>
+    </mat-card>
+
+</div>

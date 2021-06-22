@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Project.Core.Domain\Project.Core.Domain.csproj" />
+    <ProjectReference Include="..\Project.Infrastructure.Configurations.Interfaces\Project.Infrastructure.Configurations.Interfaces.csproj" />
+    <ProjectReference Include="..\Project.Infrastructure.Pdf.Interfaces\Project.Infrastructure.Pdf.Interfaces.csproj" />
+    <ProjectReference Include="..\Project.Infrastructure.Security.Interfaces\Project.Infrastructure.Security.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PdfTemplates\ApplicationActTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

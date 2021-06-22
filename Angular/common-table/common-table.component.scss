@@ -1,0 +1,52 @@
+@import "_common.scss";
+@import "_colors.scss";
+
+.common-table-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  height: 70vh;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+
+  .common-table-mat-card {
+    background-color: white;
+
+    .common-table {
+      width: 100%;
+      background-color: white;
+
+      .localization-table-expandable-row {
+        width: 100%;
+      }
+
+      tr.example-detail-row {
+        height: 0;
+      }
+
+
+      .example-element-detail {
+        overflow: hidden;
+        display: flex;
+      }
+
+      .common-table-action-button {
+        background-color: transparent;
+        color: $yellow-main;
+
+        &.disabled-action {
+          color: gray;
+          pointer-events: none;
+        }
+      }
+
+      td, th {
+        text-align: center;
+      }
+
+      ::ng-deep .mat-sort-header-container {
+        justify-content: center;
+      }
+    }
+  }
+}
