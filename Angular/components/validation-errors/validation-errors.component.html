@@ -1,0 +1,6 @@
+<div
+  *ngIf="validationErrors && validationErrors.length && control.dirty && control.touched"
+  class="relative"
+>
+  <small class="p-error ml-2 absolute">{{ getError(validationErrors[0]) }}</small>
+</div>

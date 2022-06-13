@@ -1,0 +1,25 @@
+export const VALIDATION_ERRORS_DICTIONARY = {
+  required: 'Field is required',
+  filter_required: 'One of filters required',
+  interests_required: 'Min 1 interest is required',
+  firstname_pattern:
+    'First name should start with capital letter, at least 2 symbols, symbols only',
+  firstname_short_pattern: 'First name has invalid format',
+  lastname_pattern: 'Last name should start with capital letter, at least 2 symbols, symbols only',
+  lastname_short_pattern: 'Last name has invalid format',
+  email_pattern: 'Email has invalid format',
+  wrong_phone_number_length: "{{country}}'s dial code requires {{length}} digits",
+  twitter_url_pattern: 'Invalid Twitter url format',
+  facebook_url_pattern: 'Invalid Facebook url format',
+  linkedin_url_pattern: 'Invalid LinkedIn url format',
+  select_owner: 'Choose one of users from the list',
+  earlier_date: 'Date must be at least today',
+  incorrect_date_range: 'Incorrect date range',
+  incorrect_time_range: 'Incorrect time range',
+  incorrect_startsIn_time: 'Time has to be greater than the current one',
+  link_pattern: 'Invalid link format',
+  maxlength: 'Text exceeds max length',
+  notEqual: 'Fields must not be equal',
+  minlength: 'Min length is {{requiredLength}}',
+  agenda_item_duration_min: 'Value is required'
+};
